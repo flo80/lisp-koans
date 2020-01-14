@@ -49,9 +49,20 @@
 ;
 ; Your goal is to write the score method.
 
+
 (defun score (dice)
-  ; You need to write this method
-)
+  (let ((cts (mapcar (lambda (c) (count c dice)) '(1 2 3 4 5 6))))
+    (cond
+      ((eq nil dice) 0)
+      (t (+
+          (nth (first  cts)  '(0 100 200 1000 1100 1200))
+          (nth (second cts)  '(0   0   0  200  200  200))
+          (nth (third  cts)  '(0   0   0  300  300  300))
+          (nth (fourth cts)  '(0   0   0  400  400  400))
+          (nth (fifth  cts)  '(0  50 100  500  550  600))
+          (nth (sixth  cts)  '(0   0   0  600  600  600)))))))
+
+
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))
